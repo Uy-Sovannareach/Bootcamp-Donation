@@ -9,6 +9,7 @@ const DonationForm = () => {
   const [message, setMessage] = useState('');
   const [donationAmount, setDonationAmount] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
+  const [shareMessage, setShareMessage] = useState('');
   
   // Pre-defined donation amounts
   const amounts = [10, 25, 50, 100];
@@ -47,6 +48,23 @@ const DonationForm = () => {
     }
   };
 
+  // Handler for the "Share Now" button to copy the link
+  const handleShareNow = () => {
+    const tempInput = document.createElement('input');
+    tempInput.value = window.location.href;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    try {
+      document.execCommand('copy');
+      setShareMessage('Link copied!');
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      setShareMessage('Failed to copy link.');
+    }
+    document.body.removeChild(tempInput);
+    setTimeout(() => setShareMessage(''), 3000); // Hide the message after 3 seconds
+  };
+
   return (
     <div className="flex justify-center items-center py-10 px-4 font-['Inter']">
       <div className="w-full max-w-2xl p-8 bg-lime-50 rounded-3xl shadow-xl flex flex-col items-center space-y-8">
@@ -60,8 +78,8 @@ const DonationForm = () => {
           {/* Image */}
           <div className="w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden shadow-md">
             <img 
-              src="https://placehold.co/128x128/f0f0f0/6b7280?text=Temple" 
-              alt="Preah Vihear Temple" 
+              src="/superhero.webp" 
+              alt="Superhero" 
               className="w-full h-full object-cover" 
             />
           </div>
@@ -69,10 +87,10 @@ const DonationForm = () => {
           {/* Text Content */}
           <div className="flex flex-col text-center sm:text-left">
             <h2 className="text-lg font-semibold text-gray-800">
-              Support the Restoration of
+              Together For
             </h2>
             <h3 className="text-xl font-bold text-gray-900">
-              Preah Vihear Temple
+              Eric
             </h3>
           </div>
         </div>
@@ -138,13 +156,31 @@ const DonationForm = () => {
           ></textarea>
         </div>
         
-        {/* Pay Now Button */}
-        <button
-          onClick={handlePayNow}
-          className="flex items-center justify-center w-full sm:w-2/3 md:w-1/2 mt-4 px-8 py-4 bg-emerald-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-emerald-600 transition-colors duration-300"
-        >
-          Pay Now
-        </button>
+        {/* Action Buttons Container */}
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
+          {/* Pay Now Button */}
+          <button
+            onClick={handlePayNow}
+            className="flex-1 px-8 py-4 bg-emerald-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-emerald-600 transition-colors duration-300"
+          >
+            Pay Now
+          </button>
+          
+          {/* Share Now Button */}
+          <button
+            onClick={handleShareNow}
+            className="flex-1 px-8 py-4 bg-gray-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-gray-600 transition-colors duration-300"
+          >
+            Share Now
+          </button>
+        </div>
+        
+        {/* Share Message */}
+        {shareMessage && (
+          <div className="mt-4 text-center text-sm font-medium text-green-700 transition-opacity duration-500">
+            {shareMessage}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -164,8 +200,8 @@ function App() {
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
             <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <a href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
+            <a href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
           </div>
           <div className="md:hidden">
             {/* Mobile menu button can go here */}
@@ -201,9 +237,9 @@ function App() {
             <div className="md:col-span-1">
               <h4 className="font-semibold text-black mb-4">Navigation</h4>
               <ul className="space-y-2"> 
-                <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Home</a></li>
-                <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Donation</a></li>
-                <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">About</a></li>
+                <li><a href="/" className="hover:text-emerald-500 transition-colors duration-200">Home</a></li>
+                <li><a href="/donation" className="hover:text-emerald-500 transition-colors duration-200">Donation</a></li>
+                <li><a href="/about" className="hover:text-emerald-500 transition-colors duration-200">About</a></li>
               </ul>
             </div>
             <div className="md:col-span-1">

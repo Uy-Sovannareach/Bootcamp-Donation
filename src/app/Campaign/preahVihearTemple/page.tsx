@@ -12,8 +12,8 @@ function App() {
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
             <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <a href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
+            <a href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
           </div>
           <div className="md:hidden">
             {/* Mobile menu button can go here */}
