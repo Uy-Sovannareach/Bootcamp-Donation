@@ -1,5 +1,7 @@
 import React from 'react';
-import { Search, Facebook, Instagram, Twitter} from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Instagram, Twitter} from 'lucide-react';
 function App() {
   return (
     <div className="bg-gray-30 font-sans antialiased text-gray-800">
@@ -7,13 +9,13 @@ function App() {
       <header className="bg-gray shadow-sm sticky top-0 z-50 bg-background/80 backdrop-blur-md border-border/50">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 ">
-            <img src="logo.png" alt="Logo" className="h-20 w-20 rounded-full" />
+            <Image src="/logo.png" alt="Logo" width={80} height={80} className="rounded-full" />
             <h1 className="text-2xl font-bold text-green-600">BootCamp Donation</h1>
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
-            <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <Link href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</Link>
+            <Link href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</Link>
+            <Link href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</Link>
           </div>
           <div className="md:hidden">
             {/* Mobile menu button can go here */}
@@ -29,7 +31,7 @@ function App() {
       <main>
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center p-4">
-        <img src="group-children-lying-reading-grass-field.jpg" alt="Hero Background" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+        <Image src="/group-children-lying-reading-grass-field.jpg" alt="Hero Background" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover opacity-50" />
           <div className="relative z-10 text-white text-center w-full max-w-4xl px-4">
             <div className="flex justify-center mb-6">
             </div>
@@ -39,9 +41,9 @@ function App() {
             <p className="text-base md:text-xl font-medium mb-8 drop-shadow-md">
               Join us in making a difference, donate now and help change a life today.
             </p>
-            <a href="donation" className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-200 transform hover:scale-105">
+            <Link href="/donation" className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-200 transform hover:scale-105">
               Donate Now
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -70,9 +72,11 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Cause Card 1 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-200">
-                <img
-                  src="superhero.webp"
+                <Image
+                  src="/superhero.webp"
                   alt="A child with boxing gloves"
+                  width={400}
+                  height={240}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
@@ -81,9 +85,11 @@ function App() {
               </div>
               {/* Cause Card 2 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-200">
-                <img
-                  src="Rauth.jpg"
+                <Image
+                  src="/Rauth.jpg"
                   alt="Three students smiling"
+                  width={400}
+                  height={240}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
@@ -92,9 +98,11 @@ function App() {
               </div>
               {/* Cause Card 3 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-200">
-                <img
-                  src="givenfood.jpg"
+                <Image
+                  src="/givenfood.jpg"
                   alt="People receiving food"
+                  width={400}
+                  height={240}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
@@ -104,9 +112,9 @@ function App() {
             </div>
             <div>
               <br/>
-                <a href="/donation" className="mt-12 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-200">
+                <Link href="/donation" className="mt-12 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-200">
                   See more
-                </a>
+                </Link>
               </div>
           </div>
         </section>
@@ -117,7 +125,7 @@ function App() {
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                         <div className="md:col-span-1">
                           <div className="flex items-center space-x-2 mb-4">
-                            <img src="logo.png" alt="Logo" className="h-10 w-10 rounded-full text-emerald-500" />
+                            <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full text-emerald-500" />
                             <h1 className="text-2xl font-bold text-black">BootCamp Donation</h1>
                           </div>
                           <p className="text-sm">
@@ -127,9 +135,9 @@ function App() {
                         <div className="md:col-span-1">
                           <h4 className="font-semibold text-black mb-4">Navigation</h4>
                           <ul className="space-y-2"> 
-                            <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Home</a></li>
-                            <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Donation</a></li>
-                            <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">About</a></li>
+                            <li><Link href="/" className="hover:text-emerald-500 transition-colors duration-200">Home</Link></li>
+                            <li><Link href="/donation" className="hover:text-emerald-500 transition-colors duration-200">Donation</Link></li>
+                            <li><Link href="/about" className="hover:text-emerald-500 transition-colors duration-200">About</Link></li>
                           </ul>
                         </div>
                         <div className="md:col-span-1">

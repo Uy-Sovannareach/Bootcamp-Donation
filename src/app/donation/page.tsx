@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 function App() {
@@ -51,13 +53,13 @@ function App() {
       <header className="bg-white shadow-sm sticky top-0 z-50 bg-background/80 backdrop-blur-md border-border/50">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 ">
-            <img src="logo.png" alt="Logo" className="h-20 w-20 rounded-full" />
+            <Image src="/logo.png" alt="Logo" width={80} height={80} className="rounded-full" />
             <h1 className="text-2xl font-bold text-green-600">BootCamp Donation</h1>
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
-            <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <Link href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</Link>
+            <Link href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</Link>
+            <Link href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</Link>
           </div>
           <div className="md:hidden">
 
@@ -80,18 +82,20 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {fundraisers.map((fundraiser, index) => (
                 // Wrapping the card in an anchor tag to make it a link
-                <a key={index} href={fundraiser.href} className="block">
+                <Link key={index} href={fundraiser.href} className="block">
                   <div className="bg-gray-100 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-200 group">
-                    <img
-                      src={fundraiser.image}
+                    <Image
+                      src={`/${fundraiser.image}`}
                       alt={fundraiser.title}
+                      width={400}
+                      height={240}
                       className="w-full h-48 object-cover rounded-t-2xl group-hover:opacity-80 transition-opacity duration-200"
                     />
                     <div className="p-4">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors duration-200">{fundraiser.title}</h3>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -104,7 +108,7 @@ function App() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                   <div className="md:col-span-1">
                     <div className="flex items-center space-x-2 mb-4">
-                      <img src="logo.png" alt="Logo" className="h-10 w-10 rounded-full text-emerald-500" />
+                      <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full text-emerald-500" />
                       <h1 className="text-2xl font-bold text-black">BootCamp Donation</h1>
                     </div>
                     <p className="text-sm">
@@ -114,9 +118,9 @@ function App() {
                   <div className="md:col-span-1">
                     <h4 className="font-semibold text-black mb-4">Navigation</h4>
                     <ul className="space-y-2"> 
-                      <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Home</a></li>
-                      <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">Donation</a></li>
-                      <li><a href="#" className="hover:text-emerald-500 transition-colors duration-200">About</a></li>
+                      <li><Link href="/" className="hover:text-emerald-500 transition-colors duration-200">Home</Link></li>
+                      <li><Link href="/donation" className="hover:text-emerald-500 transition-colors duration-200">Donation</Link></li>
+                      <li><Link href="/about" className="hover:text-emerald-500 transition-colors duration-200">About</Link></li>
                     </ul>
                   </div>
                   <div className="md:col-span-1">

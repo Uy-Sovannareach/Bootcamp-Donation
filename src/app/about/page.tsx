@@ -1,20 +1,22 @@
 import React from 'react';
-import { Search, Facebook, Instagram, Twitter} from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Instagram, Twitter} from 'lucide-react';
 
-function App() {
+export default function App() {
   return (
     <div className="bg-gray-30 font-sans antialiased text-gray-800">
       {/* Header Section */}
       <header className="bg-gray shadow-sm sticky top-0 z-50 bg-background/80 backdrop-blur-md border-border/50">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 ">
-            <img src="logo.png" alt="Logo" className="h-20 w-20 rounded-full" />
+            <Image src="/logo.png" alt="Logo" width={80} height={80} className="rounded-full" />
             <h1 className="text-2xl font-bold text-green-600">BootCamp Donation</h1>
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
-            <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <Link href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</Link>
+            <Link href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</Link>
+            <Link href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</Link>
           </div>
           <div className="md:hidden">
             {/* Mobile menu button can go here */}
@@ -35,7 +37,7 @@ function App() {
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-green-600 mb-4">About Us</h2>
               <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                Learn about our mission, our team, and how we're making a difference.
+                Learn about our mission, our team, and how we&apos;re making a difference.
               </p>
             </div>
             
@@ -51,9 +53,11 @@ function App() {
                 </p>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <img
-                  src="childSmile.webp"
+                <Image
+                  src="/childSmile.webp"
                   alt="Our Mission"
+                  width={600}
+                  height={400}
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -62,9 +66,11 @@ function App() {
             {/* Our Story */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-16">
               <div className="md:order-last rounded-xl overflow-hidden shadow-lg">
-                <img
-                  src="campeople.webp"
+                <Image
+                  src="/campeople.webp"
                   alt="Our Story"
+                  width={600}
+                  height={400}
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -83,7 +89,7 @@ function App() {
             <div className="text-center mt-16">
               <h3 className="text-3xl font-bold mb-4">Join Our Cause</h3>
               <p className="text-gray-700 max-w-2xl mx-auto">
-                Whether you're looking to start a campaign or contribute to an existing one, your support can change lives.
+                Whether you&apos;re looking to start a campaign or contribute to an existing one, your support can change lives.
               </p>
               <a href="donation" className="mt-6 inline-block bg-green-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-green-700 transition-colors duration-200">
                 Start a Fundraiser
@@ -99,7 +105,7 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <img src="logo.png" alt="Logo" className="h-8 w-8 rounded-full text-emerald-500" />
+                <Image src="/logo.png" alt="Logo" width={32} height={32} className="rounded-full text-emerald-500" />
                 <h1 className="text-2xl font-bold text-white">BootCamp Donation</h1>
               </div>
               <p className="text-sm">
@@ -138,4 +144,3 @@ function App() {
     </div>
   );
 }
-export default App;

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Search, Facebook, Instagram, Twitter, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { storePayment, getTotalRaised } from '@/action/paymentcoconutschool'; // If using path aliases
 // Or, if not using aliases:
 // import { storePayment } from '../../action/payment';
@@ -48,7 +50,7 @@ const DonationForm = () => {
   // Handler for form submission (simulated)
   const handlePayNow = async () => {
     if (fullName && donationAmount > 0) {
-      const { data, error } = await storePayment({
+      const { error } = await storePayment({
         fullName,
         message,
         donationAmount,
@@ -100,9 +102,11 @@ const DonationForm = () => {
         <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-8 w-full">
           {/* Image */}
           <div className="w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden shadow-md">
-            <img 
+            <Image 
               src="/coconutschool.webp" 
               alt="Coconut School" 
+              width={128}
+              height={128}
               className="w-full h-full object-cover" 
             />
           </div>
@@ -218,13 +222,13 @@ function App() {
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 ">
             {/* Using a placeholder for the logo */}
-            <img src="/Logo.png" alt="Logo" className="h-20 w-20 rounded-full" />
+            <Image src="/logo.png" alt="Logo" width={80} height={80} className="rounded-full" />
             <h1 className="text-2xl font-bold text-green-600">BootCamp Donation</h1>
           </div>
           <div className="hidden md:flex space-x-8 text-lg font-medium">
-            <a href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</a>
-            <a href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</a>
-            <a href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</a>
+            <Link href="/" className="hover:text-emerald-600 transition-colors duration-200">Home</Link>
+            <Link href="/donation" className="hover:text-emerald-600 transition-colors duration-200">Donation</Link>
+            <Link href="/about" className="hover:text-emerald-600 transition-colors duration-200">About</Link>
           </div>
           <div className="md:hidden">
             {/* Mobile menu button can go here */}
@@ -250,7 +254,7 @@ function App() {
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 {/* Using a placeholder for the logo */}
-                <img src="/Logo.png" alt="Logo" className="h-10 w-10 rounded-full text-emerald-500" />
+                <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full text-emerald-500" />
                 <h1 className="text-2xl font-bold text-black">BootCamp Donation</h1>
               </div>
               <p className="text-sm">
@@ -260,9 +264,9 @@ function App() {
             <div className="md:col-span-1">
               <h4 className="font-semibold text-black mb-4">Navigation</h4>
               <ul className="space-y-2"> 
-                <li><a href="/" className="hover:text-emerald-500 transition-colors duration-200">Home</a></li>
-                <li><a href="/donation" className="hover:text-emerald-500 transition-colors duration-200">Donation</a></li>
-                <li><a href="/about" className="hover:text-emerald-500 transition-colors duration-200">About</a></li>
+                <li><Link href="/" className="hover:text-emerald-500 transition-colors duration-200">Home</Link></li>
+                <li><Link href="/donation" className="hover:text-emerald-500 transition-colors duration-200">Donation</Link></li>
+                <li><Link href="/about" className="hover:text-emerald-500 transition-colors duration-200">About</Link></li>
               </ul>
             </div>
             <div className="md:col-span-1">
