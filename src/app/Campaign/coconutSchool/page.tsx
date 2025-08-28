@@ -1,7 +1,57 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
+import { storePayment, getTotalRaised } from '../../../action/paymentcoconutschool';
 import { Search, Facebook, Instagram, Twitter} from 'lucide-react';
 import Message from '@/components/message';
-function App() {
+
+const DonationForm = () => {
+  const [fullName, setFullName] = useState('');
+  const [message, setMessage] = useState('');
+  const [donationAmount, setDonationAmount] = useState(0);
+  const [totalRaised, setTotalRaised] = useState(0);
+
+  // Fetch total raised on mount
+  useEffect(() => {
+    fetchTotal();
+  }, []);
+
+  const fetchTotal = async () => {
+    const total = await getTotalRaised();
+    setTotalRaised(total);
+  };
+
+  const handlePayNow = async () => {
+    if (donationAmount > 0 && fullName) {
+      const { error } = await storePayment({
+        fullName,
+        message,
+        donationAmount,
+      });
+      if (!error) {
+        window.alert(`Thank you, ${fullName}! You are donating $${donationAmount}.`);
+        setFullName('');
+        setMessage('');
+        setDonationAmount(0);
+        // Update total raised after donation
+        fetchTotal();
+      } else {
+        window.alert('Error storing payment: ' + error.message);
+      }
+    } else {
+      window.alert('Please enter your full name and select or enter a donation amount.');
+    }
+  };
+
+  return (
+    <div>
+      <h2>Total Raised: ${totalRaised.toLocaleString()}</h2>
+      {/* ...rest of your form... */}
+      <button onClick={handlePayNow}>Donate Now</button>
+    </div>
+  );
+};
+
+export default function App() {
   return (
     <div className="bg-gray-30 font-sans antialiased text-gray-800">
       {/* Header Section */}
@@ -27,7 +77,7 @@ function App() {
         </nav>
       </header>
 
-<main className="py-16">
+      <main className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
             Fundraising for Coconut School, Kirirom
@@ -129,5 +179,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -1,6 +1,9 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Facebook, Instagram, Twitter, ChevronRight } from 'lucide-react';
+import { storePayment, getTotalRaised } from '@/action/paymentcoconutschool'; // If using path aliases
+// Or, if not using aliases:
+// import { storePayment } from '../../action/payment';
 
 // The DonationForm component
 const DonationForm = () => {
@@ -10,9 +13,20 @@ const DonationForm = () => {
   const [donationAmount, setDonationAmount] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
   const [shareMessage, setShareMessage] = useState('');
+  const [totalRaised, setTotalRaised] = useState(0);
   
   // Pre-defined donation amounts
   const amounts = [10, 25, 50, 100];
+
+  // Fetch total raised amount on component mount
+  useEffect(() => {
+    const fetchTotalRaised = async () => {
+      const total = await getTotalRaised();
+      setTotalRaised(total);
+    };
+
+    fetchTotalRaised();
+  }, []);
 
   // Handler for selecting a pre-defined amount
   const handleAmountSelect = (amount: number) => {
@@ -32,19 +46,21 @@ const DonationForm = () => {
   };
 
   // Handler for form submission (simulated)
-  const handlePayNow = () => {
-    if (donationAmount > 0 && fullName) {
-      // Replaced alert with a custom message since alert() is blocked in some environments
-      // You can implement a proper modal or message box here
-      window.alert(`Thank you, ${fullName}! You are donating $${donationAmount}.`);
-      console.log('Form Submitted!', {
+  const handlePayNow = async () => {
+    if (fullName && donationAmount > 0) {
+      const { data, error } = await storePayment({
         fullName,
         message,
         donationAmount,
       });
-      // Here you would integrate with a payment gateway like Stripe or PayPal.
+      if (!error) {
+        alert('Thank you for your donation!');
+        // Optionally reset form fields here
+      } else {
+        alert('Error: ' + error.message);
+      }
     } else {
-      window.alert('Please enter your full name and select or enter a donation amount.');
+      alert('Please enter your name and donation amount.');
     }
   };
 
@@ -68,6 +84,13 @@ const DonationForm = () => {
   return (
     <div className="flex justify-center items-center py-10 px-4 font-['Inter']">
       <div className="w-full max-w-2xl p-8 bg-lime-50 rounded-3xl shadow-xl flex flex-col items-center space-y-8">
+        {/* Show total raised */}
+        <div className="w-full text-center mb-4">
+          <p className="text-lg font-semibold text-emerald-700">
+            Raised: ${totalRaised.toLocaleString()}
+          </p>
+        </div>
+        
         {/* Title */}
         <h1 className="text-3xl font-bold text-gray-800">
           Donation
@@ -163,7 +186,7 @@ const DonationForm = () => {
             onClick={handlePayNow}
             className="flex-1 px-8 py-4 bg-emerald-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-emerald-600 transition-colors duration-300"
           >
-            Pay Now
+            Donate Now
           </button>
           
           {/* Share Now Button */}

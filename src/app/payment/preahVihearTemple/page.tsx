@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Search, Facebook, Instagram, Twitter, ChevronRight } from 'lucide-react';
+import { storePayment } from '../../../action/paymentpreahvihear'; // <-- Import your reference
 
 // The DonationForm component
 const DonationForm = () => {
@@ -31,18 +32,23 @@ const DonationForm = () => {
     }
   };
 
-  // Handler for form submission (simulated)
-  const handlePayNow = () => {
+  // UPDATED: Store payment in Supabase
+  const handlePayNow = async () => {
     if (donationAmount > 0 && fullName) {
-      // Replaced alert with a custom message since alert() is blocked in some environments
-      // You can implement a proper modal or message box here
-      window.alert(`Thank you, ${fullName}! You are donating $${donationAmount}.`);
-      console.log('Form Submitted!', {
+      const { error } = await storePayment({
         fullName,
         message,
         donationAmount,
       });
-      // Here you would integrate with a payment gateway like Stripe or PayPal.
+      if (!error) {
+        window.alert(`Thank you, ${fullName}! You are donating $${donationAmount}.`);
+        setFullName('');
+        setMessage('');
+        setDonationAmount(0);
+        setCustomAmount('');
+      } else {
+        window.alert('Error storing payment: ' + error.message);
+      }
     } else {
       window.alert('Please enter your full name and select or enter a donation amount.');
     }
@@ -58,7 +64,6 @@ const DonationForm = () => {
       document.execCommand('copy');
       setShareMessage('Link copied!');
     } catch (err) {
-      console.error('Failed to copy text: ', err);
       setShareMessage('Failed to copy link.');
     }
     document.body.removeChild(tempInput);
